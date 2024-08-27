@@ -21,3 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls')),  # Esta linha serve para que o django passe a utilizar as urls que estão presentes no arquivo urls.py dentro da aplicação CORE
 ]
+
+# É indicado que se crie um arquivo dentro do seu app para gerenciar as urls que serão acessadas, aqui no arquivo de rotas original faça o import da funcionalidade include
+#   e adicione ao urlpatterns a linha -> path('', include('nomeDoApp.urls'))
