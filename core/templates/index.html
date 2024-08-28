@@ -17,7 +17,8 @@
                 <div class="text-center mb-4">
                     <h6 class="font-semibold text-[#063970] text-xl">Login</h6>
                 </div>
-                <form class="space-y-5" method="POST">
+                <form class="space-y-5" method="POST" action="{% url 'login_view' %}">
+                    {% csrf_token %}
                     <div>
                         <input id="email" type="email" class="block w-full py-3 px-3 mt-2
                             text-gray-800 appearance-none
