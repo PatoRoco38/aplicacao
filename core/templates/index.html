@@ -1,103 +1,48 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="pt-BR">
-
+<!doctype html>
+<html lang="en">
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Ferramenta web - Login</title>
-
-    <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-
-    <!-- Custom styles for this template-->
-    <link href="{% static 'css/sb-admin-2.min.css' %}"rel="stylesheet">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.tailwindcss.com" rel="stylesheet">
 </head>
-
-<body class="bg-gradient-primary">
-
-    <div class="container">
-
-        <!-- Outer Row -->
-        <div class="row justify-content-center">
-
-            <div class="col-xl-10 col-lg-12 col-md-9">
-
-                <div class="card o-hidden border-0 shadow-lg my-5">
-                    <div class="card-body p-0">
-                        <!-- Nested Row within Card Body -->
-                        <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
-                            <div class="col-lg-6">
-                                <div class="p-5">
-                                    <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Seja bem vindo</h1>
-                                    </div>
-                                    <form class="user">
-                                        <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Endereço de e-mail...">
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Senha...">
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">Manter dados de entrada</label>
-                                            </div>
-                                        </div>
-                                        <a href="index.html" class="btn btn-primary btn-user btn-block">
-                                            Logar
-                                        </a>
-                                        <hr>
-                                        <a href="index.html" class="btn btn-google btn-user btn-block">
-                                            <i class="fab fa-google fa-fw"></i> Logar com Google
-                                        </a>
-                                        <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                                            <i class="fab fa-facebook-f fa-fw"></i> Logar com Facebook
-                                        </a>
-                                    </form>
-                                    <hr>
-                                    <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Esqueci minha senha</a>
-                                    </div>
-                                    <div class="text-center">
-                                        <a class="small" href="register.html">Criar conta</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+<body class="h-screen overflow-hidden flex items-center justify-center" style="background: #edf2f7;">
+    <!-- This is an example component -->
+<script defer src="https://unpkg.com/alpinejs@3.2.3/dist/cdn.min.js"></script>
+ <div class="flex flex-col h-screen bg-gradient-to-b from-[#063970] to-blue-200">
+        <div class="grid place-items-center mx-2 my-20 sm:my-auto" x-data="{ showPass: true }">
+            <div class="w-11/12 p-12 sm:w-8/12 md:w-6/12 lg:w-5/12 2xl:w-4/12
+                px-6 py-10 sm:px-10 sm:py-6
+                bg-white rounded-lg shadow-md lg:shadow-lg">
+                <div class="text-center mb-4">
+                    <h6 class="font-semibold text-[#063970] text-xl">Login</h6>
                 </div>
+                <form class="space-y-5" method="POST">
+                    <div>
+                        <input id="email" type="email" class="block w-full py-3 px-3 mt-2
+                            text-gray-800 appearance-none
+                            border-2 border-gray-100
+                            focus:text-gray-500 focus:outline-none focus:border-gray-200 rounded-md" />
+                    </div>
 
+                    <div class="relative w-full">
+                        <input :type="showPass ? 'password' : 'text'" id="password" class="block w-full py-3 px-3 mt-2 mb-4
+                            text-gray-800 appearance-none
+                            border-2 border-gray-100
+                            focus:text-gray-500 focus:outline-none focus:border-gray-200 rounded-md" />
+                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
+                                <p class="font-semibold" @click="showPass = !showPass" x-text ="showPass ? 'Show' : 'Hide'">Show</p>
+                            </div>
+                    </div>
+
+                    <button type="submit" class="w-full py-3 mt-10 bg-[#063970] rounded-md
+                        font-medium text-white uppercase
+                        focus:outline-none hover:shadow-none">
+                        Login
+                    </button>
+                </form>
             </div>
-
-        </div>
-
     </div>
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="{% static 'js/jquery.min.js' %}"></script>
-    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="{% static 'js/jquery.easing.min.js' %}"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="{% static 'js/sb-admin-2.min.js' %}"></script>
-
+</div>
 </body>
-
 </html>

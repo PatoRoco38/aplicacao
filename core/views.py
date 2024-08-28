@@ -8,9 +8,6 @@ def index(request):
 def principal(request):
     return render(request, 'principal.html')
 
-def contato(request):
-    return render(request, 'contato.html')
-
 def login_view(request):
     if request.method == "POST":
         email = request.POST.get('email')
