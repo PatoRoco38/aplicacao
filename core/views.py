@@ -5,3 +5,6 @@ def index(request):
 
 def principal(request):
     return render(request, 'principal.html')
+
+def contato(request):
+    return render(request, 'contato.html')
