@@ -46,16 +46,21 @@ def principal_view(request):
             with open(arquivo.path(filename), newline='', encoding='utf-8') as f:
                 reader = csv.reader(f)
                 for row in reader:
-                    # Ordem dos campos a serem inclusos no banco
-                    Base.objects.create(campo0=row[0], campo1=row[1], campo2=row[2])
+                    if len(row) >=3:
+                        # Ordem dos campos a serem inclusos no banco
+                        Base.objects.create(campo0=row[1], campo1=row[2], campo2=row[3])
         except UnicodeDecodeError:
             try:
                 with open(arquivo.path(filename), newline='', encoding='ISO-8859-1') as f:
                     reader = csv.reader(f)
                     for row in reader:
-                        Base.objects.create(campo0=row[0], campo1=row[1], campo2=row[2])
+                        if len(row) >=3:
+                            Base.objects.create(campo0=row[1], campo1=row[2], campo2=row[3])
+                        else:
+                            print(f'Planilha com {row} colunas')
             except Exception as e:
-                return render(request, 'principal.html', {'Erro': f'Erro ao tentar o upload do arquivo: {str(e)}'})
+                print(f'Erro ao processar arquivo: {e}')
+                # return render(request, 'principal.html', {'Erro': f'Erro ao tentar o upload do arquivo: {str(e)}'})
 
         return render(request, 'principal.html', {'Sucesso!': 'Arquivo carregado com sucesso!'})
     

@@ -9,4 +9,4 @@ class Base(models.Model):
     criado = models.DateField('Data de Criação', auto_now_add=True)
     
     class Meta:
-        abstract = True
+        abstract = False
