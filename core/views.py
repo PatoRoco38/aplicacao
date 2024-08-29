@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.core.files.storage import FileSystemStorage
+from .models import Base
 
 def index(request):
     return render(request, 'index.html')
@@ -35,17 +36,26 @@ def principal_view(request):
     if request.method == 'POST' and request.FILES.get('csv_file'):
         csv_file = request.FILES['csv_file']
         if not csv_file.name.endswith('.csv'):
-            return render(request, 'pincipal.html', {'error': 'Este arquivo não é válido'})
+            return render(request, 'principal.html', {'error': 'Este arquivo não é válido'})
         
         arquivo = FileSystemStorage()
         filename = arquivo.save(csv_file.name, csv_file)
         uploaded_file_url = arquivo.url(filename)
 
-        with open(arquivo.path(filename), newline='', encoding='utf-8') as f:
-            reader = csv.reader(f)
-            for row in reader:
-                # Ordem dos campos a serem inclusos no banco
-                YourModel.objects.create(campo0=row[0], campo1=row[1], campo2=row[2])
+        try:
+            with open(arquivo.path(filename), newline='', encoding='utf-8') as f:
+                reader = csv.reader(f)
+                for row in reader:
+                    # Ordem dos campos a serem inclusos no banco
+                    Base.objects.create(campo0=row[0], campo1=row[1], campo2=row[2])
+        except UnicodeDecodeError:
+            try:
+                with open(arquivo.path(filename), newline='', encoding='ISO-8859-1') as f:
+                    reader = csv.reader(f)
+                    for row in reader:
+                        Base.objects.create(campo0=row[0], campo1=row[1], campo2=row[2])
+            except Exception as e:
+                return render(request, 'principal.html', {'Erro': f'Erro ao tentar o upload do arquivo: {str(e)}'})
 
         return render(request, 'principal.html', {'Sucesso!': 'Arquivo carregado com sucesso!'})
     
