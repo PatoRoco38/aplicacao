@@ -10,17 +10,18 @@ def principal(request):
 
 def login_view(request):
     if request.method == "POST":
-        email = request.POST['email']
+        username = request.POST['username']
         password = request.POST['password']
-        user = authenticate(request, username=email, password=password)
+        user = authenticate(request, username=username, password=password)
 
         if user is not None:
             login(request, user)
             return redirect('principal')  # Uma vez logado com sucesso, redireciona para a página principal
         else:
-            return render(request, 'index.html', {'error': 'Credenciais inválidas'})
-        
-    return render(request, 'index.html')
+            form_login = AuthenticationForm()
+    else:
+        form_login = AuthenticationForm()
+    return render(request, 'index.html', {'form_login': form_login})
 
 @login_required
 def principal_view(request):
