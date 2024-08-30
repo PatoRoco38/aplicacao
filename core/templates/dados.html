@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dados</title>
+</head>
+<body>
+    <h1>Dados!</h1>
+    <table border="1">
+        <tr>
+            <th>ID </th>
+            <th>Campo 1</th>
+            <th>Campo 2</th>
+        </tr>
+        {% for dado in dados %}
+        <tr>
+            <td>{{ dado.id }}</td>
+            <td>{{ dado.campo1 }}</td>
+            <td>{{ dado.campo2 }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3">Nenhum dado disponível.</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+
+    <div>
+        <a href="{% url 'principal' %}">
+            <button type="button">Voltar</button>
+        </a>
+    </div>
+</body>
+</html>

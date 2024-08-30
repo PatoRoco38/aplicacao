@@ -6,7 +6,7 @@
     <title>Aplicação web</title>
 </head>
 <body>
-    <h1>Visualização/Envio de dados</h1>
+    <h1>Envio de dados</h1>
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <div>
@@ -17,5 +17,13 @@
             <button type="submit">Upload</button>
         </div>
     </form>
+
+    <br>
+    <!-- Botão para acessar a página de exibição de dados -->
+     <div>
+        <a href="{% url 'dados' %}">
+            <button type="button">Exibir dados</button>
+        </a>
+     </div>
 </body>
 </html>

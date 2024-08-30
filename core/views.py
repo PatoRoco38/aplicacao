@@ -12,6 +12,10 @@ def index(request):
 def principal(request):
     return render(request, 'principal.html')
 
+def dados_view(request):
+    dados = Base.objects.all() # Recupera todos os dados do modelo Base
+    return render(request, 'dados.html', {'dados': dados})
+
 def login_view(request):
     if request.method == "POST":
         username = request.POST['username']
