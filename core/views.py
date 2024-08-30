@@ -37,22 +37,32 @@ def principal_view(request):
         
         arquivo = FileSystemStorage()
         filename = arquivo.save(csv_file.name, csv_file)
+        print(f'arquivo salvo como: {filename}')
         uploaded_file_url = arquivo.url(filename)
 
         try:
             with open(arquivo.path(filename), newline='', encoding='utf-8') as f:
-                reader = csv.reader(f)
+                reader = csv.reader(f, delimiter=';')
                 for row in reader:
+                    if not any(row):
+                        continue
+                    print(f'lendo linha: {row}')
                     if len(row) >=2:
                         # Ordem dos campos a serem inclusos no banco
                         Base.objects.create(campo1=row[0], campo2=row[1])
+                        print(f'Dado salvo: {row[0]}, {row[1]}')
+
         except UnicodeDecodeError:
             try:
                 with open(arquivo.path(filename), newline='', encoding='ISO-8859-1') as f:
-                    reader = csv.reader(f)
+                    reader = csv.reader(f, delimiter=';')
                     for row in reader:
+                        if not any(row):
+                            continue
+                        print(f'lendo linha: {row}')
                         if len(row) >=2:
                             Base.objects.create(campo1=row[0], campo2=row[1])
+                            print(f'Dado salvo: {row[0]}, {row[1]}')
                         else:
                             print(f'Planilha com {len(row)} colunas')
             except Exception as e:
