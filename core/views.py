@@ -43,16 +43,16 @@ def principal_view(request):
             with open(arquivo.path(filename), newline='', encoding='utf-8') as f:
                 reader = csv.reader(f)
                 for row in reader:
-                    if len(row) >=3:
+                    if len(row) >=2:
                         # Ordem dos campos a serem inclusos no banco
-                        Base.objects.create(campo0=row[0], campo1=row[1], campo2=row[2])
+                        Base.objects.create(campo1=row[0], campo2=row[1])
         except UnicodeDecodeError:
             try:
                 with open(arquivo.path(filename), newline='', encoding='ISO-8859-1') as f:
                     reader = csv.reader(f)
                     for row in reader:
-                        if len(row) >=3:
-                            Base.objects.create(campo0=row[0], campo1=row[1], campo2=row[2])
+                        if len(row) >=2:
+                            Base.objects.create(campo1=row[0], campo2=row[1])
                         else:
                             print(f'Planilha com {len(row)} colunas')
             except Exception as e:
